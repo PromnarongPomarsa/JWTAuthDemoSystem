@@ -1,5 +1,11 @@
+using backend_member.Data;
 using backend_member.Models;
+using backend_member.Repositories;
+using backend_member.Repositories.IRepositories;
+using backend_member.Services;
+using backend_member.Services.IServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -11,9 +17,18 @@ builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSett
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
+// services
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+// respositories
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 var jwtOptions = builder.Configuration.GetSection("ApiSettings:JwtOptions").Get<JwtOptions>();
 
+builder.Services.AddDbContext<AppDbContext>(option =>
+{
+    option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

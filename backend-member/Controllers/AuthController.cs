@@ -1,4 +1,6 @@
 ﻿using backend_member.Models;
+using backend_member.Models.RequestDto;
+using backend_member.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend_member.Controllers
@@ -8,9 +10,11 @@ namespace backend_member.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ResponseDto _response;
-        public AuthController()
+        private readonly IAuthService _authService; 
+        public AuthController(IAuthService authService)
         {
             _response = new ResponseDto();
+            _authService = authService;
         }
 
         [HttpPost("login")]
@@ -21,10 +25,10 @@ namespace backend_member.Controllers
         }
 
         [HttpPost("register")]
-        public ResponseDto Register()
+        public async Task<ResponseDto> Register([FromBody] AuthLoginRequestDto req)
         {
-            _response.message = "Register Function";
-            return _response;
+            ResponseDto resp = await _authService.Register(req);
+            return resp;
         }
 
         [HttpPost("logout")]

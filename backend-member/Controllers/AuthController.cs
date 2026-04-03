@@ -18,10 +18,10 @@ namespace backend_member.Controllers
         }
 
         [HttpPost("login")]
-        public ResponseDto Login()
+        public async Task<ResponseDto> Login([FromBody] AuthLoginRequestDto req)
         {
-            _response.message = "login Function";
-            return _response;
+            ResponseDto resp = await _authService.Login(req);
+            return resp;
         }
 
         [HttpPost("register")]

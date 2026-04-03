@@ -19,6 +19,7 @@ builder.Services.AddControllers();
 
 // services
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 // respositories
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();

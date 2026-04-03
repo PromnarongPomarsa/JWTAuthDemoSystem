@@ -5,6 +5,7 @@ namespace backend_member.Services.IServices
 {
     public interface IAuthService
     {
+        Task<ResponseDto> Login(AuthLoginRequestDto req);
         Task<ResponseDto> Register(AuthLoginRequestDto req);
     }
 }

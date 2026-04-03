@@ -24,9 +24,8 @@ namespace backend_member.Services
 
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Email, applicationUser.user_email),
                 new Claim(JwtRegisteredClaimNames.Sub, applicationUser.id),
-                new Claim(JwtRegisteredClaimNames.Name, applicationUser.user_code)
+                new Claim(JwtRegisteredClaimNames.Name, applicationUser.user_name)
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor

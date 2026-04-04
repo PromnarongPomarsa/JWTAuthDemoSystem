@@ -21,19 +21,13 @@ namespace backend_member.Services
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(req.username) || string.IsNullOrWhiteSpace(req.password))
-                {
-                    _response.isSuccess = false;
-                    _response.message = "Unable to process: Invalid username or password";
-                    return _response;
-                }
-
 
                 UMEMUser existingUser = await _authRepo.GetByUsername(req.username);
                 if (existingUser != null)
                 {
                     _response.isSuccess = false;
                     _response.message = "Unable to process: Username already exists";
+                    _response.statusCode = StatusCodes.Status400BadRequest;
                     return _response;
                 }
 
@@ -57,6 +51,7 @@ namespace backend_member.Services
             {
                 _response.isSuccess = false;
                 _response.message = ex.Message.ToString();
+                _response.statusCode = StatusCodes.Status500InternalServerError;
             }
             return _response;
         }
@@ -69,14 +64,17 @@ namespace backend_member.Services
                 {
                     _response.isSuccess = false;
                     _response.message = "Unable to process: Invalid username or password";
+                    _response.statusCode = StatusCodes.Status400BadRequest;
                     return _response;
                 }
 
                 UMEMUser user = await _authRepo.GetByUsername(req.username);
+
                 if (user == null)
                 {
                     _response.isSuccess = false;
                     _response.message = "Unable to process: This email doen't exists";
+                    _response.statusCode = StatusCodes.Status401Unauthorized;
                     return _response;
                 }
 
@@ -86,6 +84,7 @@ namespace backend_member.Services
                 {
                     _response.isSuccess = false;
                     _response.message = "Unable to process: Invalid password";
+                    _response.statusCode = StatusCodes.Status401Unauthorized;
                     return _response;
                 }
 
@@ -95,7 +94,7 @@ namespace backend_member.Services
                     user_name = user.username,
                 };
 
-                var token = _jwtService.GenerateToken(data);
+                string token = _jwtService.GenerateToken(data);
 
                 _response.result = token;
             }
@@ -103,6 +102,7 @@ namespace backend_member.Services
             {
                 _response.isSuccess = false;
                 _response.message = ex.Message.ToString();
+                _response.statusCode = StatusCodes.Status500InternalServerError;
             }
             return _response;
         }

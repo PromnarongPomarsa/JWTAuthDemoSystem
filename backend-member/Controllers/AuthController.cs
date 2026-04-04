@@ -18,17 +18,34 @@ namespace backend_member.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ResponseDto> Login([FromBody] AuthLoginRequestDto req)
+        public async Task<ActionResult<ResponseDto>> Login([FromBody] AuthLoginRequestDto req)
         {
+
             ResponseDto resp = await _authService.Login(req);
-            return resp;
+
+            if (!resp.isSuccess)
+            {
+                return StatusCode(resp.statusCode, resp);
+            }
+
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,        
+                Secure = true,          
+                SameSite = SameSiteMode.None,
+                Expires = DateTimeOffset.UtcNow.AddDays(7) 
+            };
+
+            Response.Cookies.Append("jwt", resp.result.ToString(), cookieOptions);
+
+            return StatusCode(resp.statusCode, resp);
         }
 
         [HttpPost("register")]
-        public async Task<ResponseDto> Register([FromBody] AuthLoginRequestDto req)
+        public async Task<ActionResult<ResponseDto>> Register([FromBody] AuthLoginRequestDto req)
         {
             ResponseDto resp = await _authService.Register(req);
-            return resp;
+            return StatusCode(resp.statusCode, resp);
         }
 
         [HttpPost("logout")]

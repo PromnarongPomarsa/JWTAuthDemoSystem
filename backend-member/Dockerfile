@@ -17,4 +17,4 @@ COPY --from=publish /app/publish .
 ARG ASPNETCORE_ENV=Development
 ENV ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENV}
 
-ENTRYPOINT ["dotnet", "backend-member.csproj"]
+ENTRYPOINT ["dotnet", "backend-member.dll"]

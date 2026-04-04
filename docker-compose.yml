@@ -29,7 +29,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
-      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=member;Username=postgres;Password=postgres123
+      ConnectionStrings__DefaultConnection: Host=db;Port=5432;Database=member;Username=postgres;Password=postgres123
       ApiSettings__JwtOptions__Secret: THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET
       ApiSettings__JwtOptions__Issuer: auth
       ApiSettings__JwtOptions__Audience: client

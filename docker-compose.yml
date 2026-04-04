@@ -1,0 +1,51 @@
+
+services:
+  db:
+    image: postgres:18
+    container_name: jwt-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: member
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5432:5432"
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data
+    # healthcheck:
+    #   test: ["CMD-SHELL", "pg_isready -U postgres -d member"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
+
+  backend-member:
+    build:
+      context: ./backend-member
+      dockerfile: Dockerfile
+    container_name: jwt-backend-member
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=member;Username=postgres;Password=postgres123
+      ApiSettings__JwtOptions__Secret: THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET
+      ApiSettings__JwtOptions__Issuer: auth
+      ApiSettings__JwtOptions__Audience: client
+    ports:
+      - "8080:8080"
+
+  frontend-member:
+    build:
+      context: ./frontend-member
+      dockerfile: Dockerfile
+    container_name: jwt-frontend-member
+    restart: unless-stopped
+    depends_on:
+      - backend-member
+    ports:
+      - "80:80"
+
+volumes:
+  postgres_data:

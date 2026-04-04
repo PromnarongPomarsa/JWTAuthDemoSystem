@@ -1,7 +1,10 @@
 ﻿using backend_member.Models;
 using backend_member.Models.RequestDto;
 using backend_member.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace backend_member.Controllers
 {
@@ -49,10 +52,27 @@ namespace backend_member.Controllers
         }
 
         [HttpPost("logout")]
-        public ResponseDto Logout()
+        public async Task<ActionResult<ResponseDto>> Logout()
         {
-            _response.message = "Logout Function";
-            return _response;
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Path = "/"
+            };
+            Response.Cookies.Delete("jwt", cookieOptions);
+
+            _response.message = "Logout Success";
+            return StatusCode(_response.statusCode, _response);
+        }
+
+        [Authorize]
+        [HttpGet("user")]
+        public async Task<ActionResult<ResponseDto>> GetUser()
+        {
+            _response.result = User.FindFirst("name")?.Value;
+            return StatusCode(_response.statusCode, _response);
         }
     }
 }

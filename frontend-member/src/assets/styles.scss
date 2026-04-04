@@ -1,0 +1,306 @@
+/* You can add global styles to this file, and also import other style files */
+@use './tailwind.css';
+@use './layout/layout.scss';
+
+// @font-face {
+//   font-family: 'Kanit';
+//   src: local('Kanit Regular'),
+//     local('Kanit-Regular'),
+//     url('/assets/fonts/kanit/Kanit-Regular.woff2') format('woff2');
+//   font-weight: 400;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+// @font-face {
+//   font-family: 'Kanit';
+//   src: local('Kanit Medium'),
+//     local('Kanit-Medium'),
+//     url('/assets/fonts/kanit/Kanit-Medium.woff2') format('woff2');
+//   font-weight: 500;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+// @font-face {
+//   font-family: 'Kanit';
+//   src: local('Kanit Bold'),
+//     local('Kanit-Bold'),
+//     url('/assets/fonts/kanit/Kanit-Bold.woff2') format('woff2');
+//   font-weight: 700;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+// html,
+// body {
+//   font-family: 'Kanit',
+//     -apple-system,
+//     BlinkMacSystemFont,
+//     'Segoe UI',
+//     Roboto,
+//     'Helvetica Neue',
+//     Arial,
+//     sans-serif;
+// }
+
+
+@font-face {
+  font-family: 'Noto Sans Thai';
+  src: local('Noto Sans Thai Regular'),
+    local('NotoSansThai-Regular'),
+    url('/assets/fonts/noto-sans-thai/NotoSansThai-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Thai';
+  src: local('Noto Sans Thai Medium'),
+    local('NotoSansThai-Medium'),
+    url('/assets/fonts/noto-sans-thai/NotoSansThai-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Thai';
+  src: local('Noto Sans Thai Bold'),
+    local('NotoSansThai-Bold'),
+    url('/assets/fonts/noto-sans-thai/NotoSansThai-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html,
+body {
+  font-family: 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body:not(.prd) .layout-topbar-actions-nonprd {
+  margin-right: 1.5rem;
+}
+
+/* ===== Topbar Base ===== */
+// .layout-topbar {
+//   background: oklch(97% 0.01 20deg);
+//   border-bottom: 1px solid oklch(90% 0.02 20deg);
+//   backdrop-filter: blur(8px);
+//   -webkit-backdrop-filter: blur(8px);
+//   box-shadow: 0 2px 8px oklch(20% 0.02 20deg / 0.05);
+//   padding: 0 1.5rem;
+//   height: 4rem;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+// }
+
+// /* ===== Logo Section ===== */
+// .layout-topbar-logo {
+//   display: flex;
+//   align-items: center;
+//   gap: 0.75rem;
+//   font-weight: 600;
+//   font-size: 1.1rem;
+//   color: oklch(28% 0.02 20deg);
+// }
+
+/* ===== Environment Badge ===== */
+.environment-badge {
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  background: oklch(90% 0.05 13deg);
+  color: oklch(45% 0.15 13deg);
+}
+
+/* ตัวอย่างแยก environment */
+.env-dev {
+  background: oklch(92% 0.08 140deg);
+  color: oklch(45% 0.15 140deg);
+  padding-top: 0.4rem;
+}
+
+.env-uat {
+  background: oklch(92% 0.08 80deg);
+  color: oklch(45% 0.15 80deg);
+  padding-top: 0.4rem;
+}
+
+.env-prod {
+  background: oklch(90% 0.08 13deg);
+  color: oklch(50% 0.18 13deg);
+  padding-top: 0.4rem;
+}
+
+/* ===== Action Buttons ===== */
+.layout-topbar-action {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 0.75rem;
+  background: transparent;
+  color: oklch(35% 0.02 20deg);
+  transition: all 0.2s ease;
+}
+
+.layout-topbar-action:hover {
+  background: oklch(92% 0.05 13deg);
+  color: oklch(60% 0.18 13deg);
+}
+
+/* ===== Logout Button Modern ===== */
+.layout-topbar .layout-menu-button {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 0.75rem;
+  background: transparent;
+  color: oklch(35% 0.02 20deg)  !important;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+.layout-topbar .layout-menu-button:hover {
+  background: oklch(95.5% 0.012 20deg) !important;
+  color: oklch(55% 0.18 13deg) !important;
+  backdrop-filter: blur(6px);
+}
+
+// .layout-topbar-menu-content .layout-topbar-action {
+//   width: 100%;
+//   justify-content: flex-start;
+//   gap: 0.5rem;
+//   border-radius: 0.75rem;
+// }
+
+.layout-topbar-menu-content .layout-topbar-action:hover {
+  background: oklch(92% 0.05 13deg);
+  color: oklch(60% 0.18 13deg);
+}
+
+.layout-topbar .layout-topbar-logo {
+  font-size: 1.3rem;
+}
+
+.layout-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.layout-topbar-actions span {
+  white-space: nowrap;
+}
+
+.spinner-overlay {
+  position: fixed; //absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--maskbg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+input:disabled {
+  background-color: rgb(239 239 239);
+  color: black;
+}
+
+.p-datatable.p-datatable-sm .p-datatable-thead>tr>th {
+  // background: oklch(92% 0.05 13deg);
+  // color: oklch(55% 0.18 13deg);
+  background: oklch(94% 0.01 20deg);
+  color: oklch(28% 0.02 20deg);
+  font-weight: 700;
+  border-bottom: 1px solid oklch(94% 0.01 20deg);
+}
+
+.p-datatable-end {
+  text-align: end !important;
+}
+
+.env-ribbon {
+  position: fixed;
+  top: 10px;
+  right: -80px;
+  width: 200px;
+  transform: rotate(45deg);
+  text-align: center;
+  font-weight: bold;
+  padding: 4px 0;
+  z-index: 9999;
+  color: white;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.env-ribbon.dev {
+  background: oklch(92% 0.08 140deg);
+  color: oklch(45% 0.15 140deg);
+}
+
+.env-ribbon.qas {
+  background: oklch(90% 0.08 13deg);
+  color: oklch(50% 0.18 13deg);
+}
+
+@media (max-width: 991px) {
+  .layout-topbar .layout-topbar-menu .layout-topbar-label i {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    padding: 1rem;
+  }
+}
+
+.layout-sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-sidebar app-menu {
+  flex: 1;
+}
+
+.sidebar-version {
+  font-size: 0.825rem;
+  color: oklch(45% 0.015 20deg);
+  text-align: center;
+  padding: 1rem 0;
+  border-top: 1px solid oklch(88% 0.015 20deg);
+}
+
+.p-card-title {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+}
+
+.p-tag-status {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+}
+
+.link-download {
+  color: var(--p-button-link-color);
+  transition: 0.3s;
+}
+
+.link-download:hover {
+  text-decoration: underline;
+}
+
+// /* ----------------   สีเขียว #91a493   --------------------- */
+.layout-wrapper {
+  background: oklch(97% 0.006 20deg)
+}
+
+.layout-main-container {
+  background: oklch(97% 0.006 20deg)
+}

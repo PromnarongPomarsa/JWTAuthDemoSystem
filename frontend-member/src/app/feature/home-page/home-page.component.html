@@ -1,0 +1,15 @@
+<p-toast />
+@if (isLoading) {
+<div class="spinner-overlay">
+  <p-progressSpinner strokeWidth="4" animationDuration=".5s" aria-label="Loading"></p-progressSpinner>
+</div>
+}
+
+<div class="min-h-screen bg-slate-100">
+    <main class="flex min-h-[calc(100vh-88px)] items-center justify-center px-4 py-10">
+        <div
+            class="mb-2 block text-lg font-medium text-slate-800 align-items-center justify-content-center">
+            Welcome user: {{ username }} 
+        </div>
+    </main>
+</div>

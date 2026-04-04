@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "primeicons/primeicons.css";
 
 @font-face {
   font-family: 'Noto Sans Thai';
@@ -34,7 +35,6 @@ html,
 body {
   font-family: 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
-
 
 :host {
   display: block;
@@ -119,6 +119,26 @@ body {
   box-shadow: none;
 }
 
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--maskbg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(2px);
+  z-index: 999;
+}
+
+:host ::ng-deep .spinner-overlay .p-progressspinner {
+  width: 64px;
+  height: 64px;
+}
+
 .register-row {
   text-align: center;
   margin-top: 1.5rem;
@@ -131,6 +151,11 @@ body {
 }
 
 @media (max-width: 640px) {
+  :host ::ng-deep .spinner-overlay .p-progressspinner {
+    width: 52px;
+    height: 52px;
+  }
+
   .login-page {
     padding: 3rem 1.25rem 0;
   }

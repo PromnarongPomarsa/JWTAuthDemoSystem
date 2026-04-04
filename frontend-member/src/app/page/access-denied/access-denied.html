@@ -1,0 +1,21 @@
+<div class="min-h-screen bg-slate-100">
+    <main class="flex min-h-[calc(100vh-88px)] flex-col items-center justify-center px-4 py-10">
+        <section class="w-full max-w-md rounded-2xl bg-white px-6 py-8 text-center shadow-lg sm:px-8 sm:py-10">
+            <i class="pi pi-exclamation-triangle text-5xl text-yellow-500 sm:text-6xl mb-4"
+                style="font-size: 3rem;"></i>
+
+            <h1 class="mb-3 text-xl font-semibold text-slate-800 sm:text-2xl">
+                Access Denied!
+            </h1>
+
+            <p class="text-sm leading-6 text-slate-600 sm:text-base">
+                You don't have permission to access this page.
+            </p>
+
+            <div class="col-span-12 mt-8 text-center gap-4 flex flex-col sm:flex-row items-center justify-center">
+                <p-button label="Retry" (click)="getBackToLogin()" severity="warn" />
+                <p-button label="Sign out" (click)="logout()" severity="danger" />
+            </div>
+        </section>
+    </main>
+</div>

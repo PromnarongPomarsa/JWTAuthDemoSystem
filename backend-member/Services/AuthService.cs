@@ -27,7 +27,7 @@ namespace backend_member.Services
                 {
                     _response.isSuccess = false;
                     _response.message = "Unable to process: Username already exists";
-                    _response.statusCode = StatusCodes.Status400BadRequest;
+                    _response.statusCode = StatusCodes.Status409Conflict;
                     return _response;
                 }
 
@@ -63,7 +63,7 @@ namespace backend_member.Services
                 if (string.IsNullOrWhiteSpace(req.username) || string.IsNullOrWhiteSpace(req.password))
                 {
                     _response.isSuccess = false;
-                    _response.message = "Unable to process: Invalid username or password";
+                    _response.message = "The values are requier";
                     _response.statusCode = StatusCodes.Status400BadRequest;
                     return _response;
                 }
@@ -73,8 +73,8 @@ namespace backend_member.Services
                 if (user == null)
                 {
                     _response.isSuccess = false;
-                    _response.message = "Unable to process: This email doen't exists";
-                    _response.statusCode = StatusCodes.Status401Unauthorized;
+                    _response.message = "This email doen't exists";
+                    _response.statusCode = StatusCodes.Status409Conflict;
                     return _response;
                 }
 
@@ -83,8 +83,8 @@ namespace backend_member.Services
                 if (!isPasswordValid)
                 {
                     _response.isSuccess = false;
-                    _response.message = "Unable to process: Invalid password";
-                    _response.statusCode = StatusCodes.Status401Unauthorized;
+                    _response.message = "Invalid value";
+                    _response.statusCode = StatusCodes.Status409Conflict;   
                     return _response;
                 }
 

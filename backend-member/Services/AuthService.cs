@@ -26,7 +26,7 @@ namespace backend_member.Services
                 if (existingUser != null)
                 {
                     _response.isSuccess = false;
-                    _response.message = "Unable to process: Username already exists";
+                    _response.message = "อีเมลนี้มีบัญชีอยู่แล้วในระบบ";
                     _response.statusCode = StatusCodes.Status409Conflict;
                     return _response;
                 }
@@ -73,7 +73,7 @@ namespace backend_member.Services
                 if (user == null)
                 {
                     _response.isSuccess = false;
-                    _response.message = "This email doen't exists";
+                    _response.message = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
                     _response.statusCode = StatusCodes.Status409Conflict;
                     return _response;
                 }
@@ -83,7 +83,7 @@ namespace backend_member.Services
                 if (!isPasswordValid)
                 {
                     _response.isSuccess = false;
-                    _response.message = "Invalid value";
+                    _response.message = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
                     _response.statusCode = StatusCodes.Status409Conflict;   
                     return _response;
                 }

@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, inject } from '@angular/core';
+import { booleanAttribute, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, Validators, ReactiveFormsModule   } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -42,13 +42,11 @@ import { finalize } from 'rxjs';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private _authService = inject(AuthService);
   private _messageService = inject(MessageService);
-
-
 
   form = this.fb.group({
     username: ['', Validators.required],
@@ -61,12 +59,19 @@ export class RegisterComponent {
 
   constructor() { }
 
+  ngOnInit(): void {
+
+  }
+
   validatePassword(): boolean {
     return this.form.get('password')?.value === this.form.get('comfirm_password')?.value;
   }
 
   onRegister() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
     if (!this.validatePassword()) {
       this.isNotMatchPass = true;
@@ -82,6 +87,7 @@ export class RegisterComponent {
     this._authService.register(req).pipe(finalize(() => this.isLoading = false)).subscribe({
       next: (response: ResponseDto<any>) => {
         if (response.isSuccess) {
+          this._messageService.add({ severity: 'success', summary: 'Success', detail: response.message, });
           this.router.navigate(['/login']);
         }
       },

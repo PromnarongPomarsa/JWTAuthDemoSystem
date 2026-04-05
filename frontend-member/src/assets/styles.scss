@@ -159,7 +159,7 @@ body:not(.prd) .layout-topbar-actions-nonprd {
   width: 2.5rem;
   border-radius: 0.75rem;
   background: transparent;
-  color: oklch(35% 0.02 20deg)  !important;
+  color: oklch(35% 0.02 20deg) !important;
   transition: all 0.2s ease;
   backdrop-filter: blur(6px);
 }
@@ -239,7 +239,7 @@ input:disabled {
   z-index: 9999;
   color: white;
   letter-spacing: 1px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .env-ribbon.dev {

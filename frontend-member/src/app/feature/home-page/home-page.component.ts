@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 
 import { AuthService } from '../../core/service/auth.service';
 import { ResponseDto } from '../../core/model/ResponsDto';
@@ -9,6 +9,7 @@ import { ToastModule } from 'primeng/toast';
 import { ProgressSpinner } from 'primeng/progressspinner';
 import { DialogService } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
+import { GetUserDto } from '../../core/model/GetUserDto';
 
 
 @Component({
@@ -21,6 +22,7 @@ import { MessageService } from 'primeng/api';
 export class HomePageComponent implements OnInit, OnDestroy {
   private _authService = inject(AuthService);
   private _messageService = inject(MessageService);
+  private _cdr = inject(ChangeDetectorRef); 
 
 
   isLoading: boolean = false;
@@ -33,12 +35,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   getUserInfo() {
     this.isLoading = true;
-    this.isLoading = false;
-    this._authService.getUser().pipe(finalize(() => this.isLoading = false)).subscribe({
-      next: (response: ResponseDto<string>) => {
+    this._authService.getUser().pipe(finalize(() => {this.isLoading = false, this._cdr.detectChanges()})).subscribe({
+      next: (response: ResponseDto<GetUserDto>) => {
         if (response.isSuccess) {
-          const userInfo: string = response.result;
-          this.username = userInfo;
+          this.username = response.result.username;
         }
       },
       error: (err) => {

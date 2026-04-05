@@ -71,7 +71,7 @@ namespace backend_member.Controllers
         [HttpGet("user")]
         public async Task<ActionResult<ResponseDto>> GetUser()
         {
-            _response.result = User.FindFirst("name")?.Value;
+            _response.result = new { username = User.FindFirst("name")?.Value };
             return StatusCode(_response.statusCode, _response);
         }
     }

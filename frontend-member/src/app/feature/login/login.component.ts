@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormsModule, Validators, ReactiveFormsModule   } from '@angular/forms';
+import { FormBuilder, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
@@ -38,20 +38,20 @@ import { finalize } from 'rxjs';
     PasswordModule,
     ToastModule,
     ProgressSpinner,
-    ReactiveFormsModule 
+    ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   providers: [MessageService, DialogService]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private _apiService = inject(AuthService);
   private _messageService = inject(MessageService);
 
 
-    form = this.fb.group({
+  form = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required]
   });
@@ -60,11 +60,18 @@ export class LoginComponent {
 
   constructor() { }
 
-  onLogin() {
-    if (this.form.invalid) return;
+  ngOnInit(): void {
     
+  }
+
+  onLogin() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
     const req: AuthRequestDto = {
-      username: this.form.value.username! ,
+      username: this.form.value.username!,
       password: this.form.value.password!
     }
 

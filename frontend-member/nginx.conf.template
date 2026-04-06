@@ -5,6 +5,13 @@ server {
     root /usr/share/nginx/html;
     index index.html;
 
+    location /api-auth/ {
+        proxy_pass https://jwtauthdemosystem-production.up.railway.app/;
+        proxy_set_header Host jwtauthdemosystem-production.up.railway.app;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_ssl_server_name on;
+    }
+
     location /assets/ {
         try_files $uri =404;
     }

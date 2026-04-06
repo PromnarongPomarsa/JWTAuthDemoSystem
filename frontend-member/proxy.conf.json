@@ -1,6 +1,6 @@
 {
    "/api-auth": {
-      "target": "https://thaibevauth.up.railway.app",
+      "target": "https://jwtauthdemobackend-production.up.railway.app",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug",

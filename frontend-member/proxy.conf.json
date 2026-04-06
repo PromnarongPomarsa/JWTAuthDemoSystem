@@ -1,6 +1,6 @@
 {
    "/api-auth": {
-      "target": "https://localhost:7260",
+      "target": "https://thaibevauth.up.railway.app",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug",

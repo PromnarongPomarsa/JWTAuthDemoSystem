@@ -1,1 +1,1 @@
-Link: thaibevauth.up.railway.app
+URL: thaibevauth.up.railway.app
